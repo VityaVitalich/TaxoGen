@@ -83,7 +83,7 @@ class LabelingTool:
         ], layout=Layout(align_items='center', border='100px'))
 
 
-        self.label2value = {'Model A is Better': 1, 'Model B is Better': 2, "Tie": 3, "Both are bad": 4}
+        self.label2value = {'Model A is Better': 0, 'Model B is Better': 1, "Tie": 2, "Both are bad": 3}
 
     def _remove_label(self, button):
         idx = self.indices[self.position]
