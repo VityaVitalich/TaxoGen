@@ -37,7 +37,7 @@ class LabelingTool:
         assert 'model_a' in self.dataset.columns and 'model_b' in self.dataset.columns, "No models defined for each pair"
 
         try:
-            self.position = self.dataset.index[self.dataset[self.label_column].notna()][-1]
+            self.position = len(self.dataset.index[self.dataset[self.label_column].notna()])
         except IndexError:
             self.position = 0
 
