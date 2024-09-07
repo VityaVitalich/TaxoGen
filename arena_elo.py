@@ -73,8 +73,8 @@ def get_bootstrap_result(battles, func_compute_elo, num_round):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Calculate ELO ratings for models based on battle outcomes.')
     parser.add_argument('input_file', type=str, help='Input file containing the dataframe (TSV format).')
-    parser.add_argument('output_file', type=str, help='Output file to save the ELO ratings (TXT format).')
-    parser.add_argument('label_column', type=str, help='Column name with the battle outcomes.')
+    #parser.add_argument('output_file', type=str, help='Output file to save the ELO ratings (TXT format).')
+    #parser.add_argument('label_column', type=str, help='Column name with the battle outcomes.')
 
     args = parser.parse_args()
 
