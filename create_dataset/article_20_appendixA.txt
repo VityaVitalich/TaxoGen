@@ -1,0 +1,22 @@
+coin.n.01 coin
+chromatic_color.n.01 chromatic color, chromatic colour, spectral color, spectral colour
+coat.n.01 coat
+jewelry.n.01 jewelry, jewellery
+furniture.n.01 furniture, piece of furniture, article of furniture
+pasta.n.02 pasta, alimentary paste
+cheese.n.01 cheese
+room.n.01 room
+meat.n.01 meat
+wine.n.01 wine, vino
+dinosaur.n.01 dinosaur
+candy.n.01 candy, confect
+beverage.n.01 beverage, drink, drinkable, potable
+cloak.n.02 cloak
+doll.n.01 doll, dolly
+pie.n.01 pie
+drum.n.01 drum, membranophone, tympan
+makeup.n.01 makeup, make-up, war paint
+movie.n.01 movie, film, picture, moving_picture, moving-picture_show, motion_picture, motion-picture_show, picture_show, pic, flick
+child's_game.n.01 child’s game
+trouser.n.01 trouser, pant
+guitar.n.01 guitar
