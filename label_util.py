@@ -1,6 +1,7 @@
 from ipywidgets import Output, Button, Layout, HBox, VBox
 from IPython.display import Image, display, clear_output, Markdown, HTML
 from itertools import zip_longest
+import os
 
 # input dataset with nodes
 # iterate over nodes
@@ -33,10 +34,10 @@ class LabelingTool:
         if self.label_column not in self.dataset:
             self.dataset[self.label_column] = None
 
-        assert 'model_1' in self.dataset.columns and 'model_2' in self.dataset.columns, "No models defined for each pair"
+        assert 'model_a' in self.dataset.columns and 'model_b' in self.dataset.columns, "No models defined for each pair"
 
         try:
-            self.position = self.dataset.index[self.dataset[self.label_column].notna()][-1]
+            self.position = len(self.dataset.index[self.dataset[self.label_column].notna()])
         except IndexError:
             self.position = 0
 
@@ -57,6 +58,7 @@ class LabelingTool:
         self.image_1_frame = Output()
         self.image_2_frame = Output()
         self.utter_frame = Output(layout=Layout(max_width="400px"))
+        self.def_frame = Output(layout=Layout(max_width="400px"))
         self.label_frame = Output()
         self.position_frame = Output()
 
@@ -70,7 +72,7 @@ class LabelingTool:
         self.action_box = HBox([stop_button, remove_button])
 
         self.control_box = VBox([
-            self.utter_frame, self.position_frame, self.label_frame,
+            self.utter_frame, self.def_frame, self.position_frame, self.label_frame,
             self.navigation_box, self.labels_box,
             self.action_box
         ], layout=Layout(align_items='center'))
@@ -83,7 +85,7 @@ class LabelingTool:
         ], layout=Layout(align_items='center', border='100px'))
 
 
-        self.label2value = {'Model A is Better': 1, 'Model B is Better': 2, "Tie": 3, "Both are bad": 4}
+        self.label2value = {'Model A is Better': 0, 'Model B is Better': 1, "Tie": 2, "Both are bad": 3}
 
     def _remove_label(self, button):
         idx = self.indices[self.position]
@@ -115,12 +117,16 @@ class LabelingTool:
         idx = self.indices[self.position]
         item = self.dataset.loc[idx]
 
-        path2image1 = f'{self.image_path}/{item["model_1"]}/{idx}{self.img_type}'
+        path2image1 = f'{self.image_path}/{item["model_a"]}/{idx}.png'
+        if not f'{idx}.png' in os.listdir(f'{self.image_path}/{item["model_a"]}/'):
+            path2image1 = f'{self.image_path}/{item["model_a"]}/{idx}.jpg'
         with self.image_1_frame:
             clear_output(wait=True)
             display(Image(path2image1, height=300))
 
-        path2image2 = f'{self.image_path}/{item["model_2"]}/{idx}{self.img_type}'
+        path2image2 = f'{self.image_path}/{item["model_b"]}/{idx}.png'
+        if not f'{idx}.png' in os.listdir(f'{self.image_path}/{item["model_b"]}/'):
+            path2image2 = f'{self.image_path}/{item["model_b"]}/{idx}.jpg'
         with self.image_2_frame:
             clear_output(wait=True)
             display(Image(path2image2, height=300))
@@ -128,6 +134,10 @@ class LabelingTool:
         with self.utter_frame:
             clear_output(wait=True)
             display(HTML(item['core_lemma']))
+
+        with self.def_frame:
+            clear_output(wait=True)
+            display(HTML(f'Definition: {item["definition"]}'))
 
         with self.position_frame:
             clear_output(wait=True)

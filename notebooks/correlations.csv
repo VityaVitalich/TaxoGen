@@ -1,0 +1,7 @@
+,Assessor Pair,Correlation,P-Value
+0,score_ira vs score_vitya,0.7853065351737294,0.0038
+1,score_ira vs score,0.7410824440758519,0.0106
+2,score_ira vs score_alina,0.9788924646404344,0.0002
+3,score_vitya vs score,0.7451976021435717,0.0066
+4,score_vitya vs score_alina,0.7782097857802976,0.0054
+5,score vs score_alina,0.7497289817744193,0.0068
