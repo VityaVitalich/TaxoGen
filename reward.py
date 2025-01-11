@@ -23,9 +23,9 @@ if __name__ == '__main__':
 
     model = reward.load("ImageReward-v1.0")
     model = model.to('cuda:0')
-    df = pd.read_csv('/home/data/v.moskvoretskii/TaxoGen/main.csv', index_col=0)
+    df = pd.read_csv('/home/data/v.moskvoretskii/TaxoGen/data/main.csv', index_col=0)
 
-    image_path = '/home/data/v.moskvoretskii/taxo_demo_images/images_def'
+    image_path = '/home/data/v.moskvoretskii/cache/taxo_demo_images/images'
 
     models = ['stabilityai_sdxl-turbo',
     'retrieval',
@@ -37,7 +37,8 @@ if __name__ == '__main__':
     'stabilityai_stable-diffusion-xl-base-1.0',
     'PixArt-alpha_PixArt-Sigma-XL-2-512-MS',
     'DeepFloyd_IF-I-XL-v1.0',
-    'stabilityai_stable-diffusion-3-medium-diffusers']
+    'stabilityai_stable-diffusion-3-medium-diffusers',
+    'black-forest-labs_FLUX.1-dev']
 
     all_rewards = {k: [] for k in models}
 
@@ -62,5 +63,5 @@ if __name__ == '__main__':
             
             all_rewards[model_name].append(score)
 
-    with open('rewards_def.pickle', 'wb') as f:
+    with open('rewards_nodef.pickle', 'wb') as f:
         pickle.dump(all_rewards, f)
