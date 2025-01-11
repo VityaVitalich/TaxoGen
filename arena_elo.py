@@ -25,6 +25,8 @@ def _logistic(x):
     return np.exp(-np.logaddexp(0, -x))
 
 def compute_mle_elo(df, SCALE=400, BASE=10, INIT_RATING=1000):
+
+
     models = pd.concat([df["model_a"], df["model_b"]]).unique()
     models = pd.Series(np.arange(len(models)), index=models)
 
@@ -46,7 +48,7 @@ def compute_mle_elo(df, SCALE=400, BASE=10, INIT_RATING=1000):
     tie_idx = (df["result"] == 2) | (df["result"] == 3)
     tie_idx[len(tie_idx) // 2:] = False
     Y[tie_idx] = 1.0
-
+    
     lr = LogisticRegression(fit_intercept=False, penalty=None, tol=1e-8)
     lr.fit(X, Y, sample_weight=1)
 
@@ -113,3 +115,5 @@ if __name__ == "__main__":
         interval = str((round(row['lower'] - row['score'], decimal), round(row['upper'] - row['score'], decimal)))
         print(
             f"{row['model'] : <50} | score: {round(row['score'], decimal) : ^5} | 95% CI: {interval : ^12}")
+    
+    stats.to_csv(f'{args.input_file}_elo.csv')
