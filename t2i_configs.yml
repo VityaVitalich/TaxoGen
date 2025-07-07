@@ -1,0 +1,6 @@
+MODEL_NAME:
+  - "<model name as in HuggingFace>"
+DATASET_PATH:
+  - "<path to dataset>"
+OUTPUT_DIR:
+  - "<path to generations>" 
